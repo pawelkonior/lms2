@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Contact
+{% endblock %}
+
+{% block container %}
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {{ form.as_div }}
+
+        <button type="submit">Send message</button>
+    </form>
+{% endblock %}
