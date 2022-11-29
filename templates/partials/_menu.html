@@ -11,8 +11,20 @@
                     <a class="nav-link active" aria-current="page" href="{% url 'home:home' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'home:contact_message_view' %}">Contact</a>
+                    <a class="nav-link active" aria-current="page"
+                       href="{% url 'home:contact_message_view' %}">Contact</a>
                 </li>
+
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Logout {{ user }}</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+
 
             </ul>
         </div>
