@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
 
 
@@ -30,3 +31,12 @@ class RegistrationForm(forms.ModelForm):
             user.save()
 
         return user
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(label="User email", widget=forms.EmailInput(attrs={
+        'placeholder': 'Your unique email'
+    }))
+
+    class Meta:
+        fields = ('username', 'password')
