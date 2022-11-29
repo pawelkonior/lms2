@@ -11,7 +11,7 @@ def registration_view(request):
             user = form.save(commit=False)
             user.is_active = True
             user.save()
-            return redirect('login')
+            return redirect('users:login_view')
     else:
         form = forms.RegistrationForm()
 
