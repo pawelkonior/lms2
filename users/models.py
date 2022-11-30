@@ -6,6 +6,8 @@ from django.db import models
 
 
 class AccountManager(BaseUserManager):
+    use_in_migrations = True
+
     def create_user(self, email, fullname, password=None):
         if not email:
             raise ValueError('Users must provide the email!')

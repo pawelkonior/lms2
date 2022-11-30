@@ -5,8 +5,8 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0 d-flex justify-content-start w-100">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'home:home' %}">Home</a>
                 </li>
@@ -17,7 +17,8 @@
 
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'users:logout_view' %}">Logout {{ user }}</a>
+                        <a class="nav-link active" aria-current="page"
+                           href="{% url 'users:logout_view' %}">Logout {{ user }}</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
@@ -25,6 +26,13 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'users:registration_view' %}">Registration</a>
+                    </li>
+                {% endif %}
+
+                {% if user.is_instructor %}
+                    <li class="nav-item align-self-end">
+                        <a class="nav-link active" aria-current="page"
+                           href="#">Add Course</a>
                     </li>
                 {% endif %}
 
