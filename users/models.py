@@ -1,5 +1,7 @@
+import os
+
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin, Group
 from django.db import models
 
 
@@ -13,6 +15,13 @@ class AccountManager(BaseUserManager):
 
         user.is_active = True
         user.save(using=self._db)
+
+        if user.is_instructor:
+            group = Group.objects.get(name=os.environ.get('DJ_GROUP_INSTRUCTORS'))
+        else:
+            group = Group.objects.get(name=os.environ.get('DJ_GROUP_STUDENTS'))
+
+        user.groups.add(group)
 
         return user
 
@@ -32,6 +41,7 @@ class AccountManager(BaseUserManager):
 class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name='User email', max_length=60, unique=True)
     fullname = models.CharField(max_length=30, unique=True)
+    is_instructor = models.BooleanField(default=False)
     date_join = models.DateTimeField(verbose_name='Date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='Last login', auto_now=True)
     is_admin = models.BooleanField(default=False)
