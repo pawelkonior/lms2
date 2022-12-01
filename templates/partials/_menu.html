@@ -32,7 +32,7 @@
                 {% if user.is_instructor %}
                     <li class="nav-item align-self-end">
                         <a class="nav-link active" aria-current="page"
-                           href="#">Add Course</a>
+                           href="{% url 'courses:course-create' %}">Add Course</a>
                     </li>
                 {% endif %}
 
